@@ -13,7 +13,7 @@ class GameDecisionTree {
 private:
     Node<T>* root;
     //For the tree
-    std::unordered_map<Node<T>*, Node<T>*> nodeMap;
+    std::unordered_map<int, Node<T>*> nodeMap;
 
 public:
     // TODO: Constructor
@@ -34,10 +34,14 @@ public:
         while (std::getline(file, line)) {
             //variable for string stream, variables for inputs
             std::stringstream ss(line);
-            std::string eventStr, description, leftStr, rightStr;
-
-            //Get current node and left and right node
-            int number = std::stoi(eventStr);
+            std::string eventNum, description, leftStr, rightStr;
+            //get info
+            std::getline(ss, eventNum, delimiter);
+            std::getline(ss, description, delimiter);
+            std::getline(ss, leftStr, delimiter);
+            std::getline(ss, rightStr, delimiter);
+            //set current node and left and right node
+            int number = std::stoi(eventNum);
             int leftEventNumber = std::stoi(leftStr);
             int rightEventNumber = std::stoi(rightStr);
 
@@ -70,13 +74,54 @@ public:
         file.close();
 
 
-        }
+    }
 
 
 
     // TODO: Function to start the game and traverse the tree based on user input
     void playGame() {
+        // Check if the tree has been loaded
+        if (!root) {
+            std::cout << "Game tree is empty. Load a story first.\n";
+            return;
+        }
 
+        // Start at the root node
+        Node<T>* current = root;
+
+        // Traverse the tree based on player choices
+        while (current) {
+            // Print the current event description
+            std::cout << current->data.description << std::endl;
+
+            // If we've reached a leaf node, end the game
+            if (!current->left && !current->right) {
+                std::cout << "\n--- End of Story ---\n";
+                break;
+            }
+
+            // Display options for the player
+            std::cout << "\nWhat do you want to do?\n";
+            std::cout << "1. Go left\n";
+            std::cout << "2. Go right\n";
+            std::cout << "Enter choice: ";
+
+            int choice;
+            std::cin >> choice;
+
+            // Move to the corresponding child node based on choice
+            if (choice == 1 && current->left) {
+                current = current->left;
+            } else if (choice == 2 && current->right) {
+                current = current->right;
+            } else {
+                // Invalid choice or no path in that direction
+                std::cout << "Invalid choice or no further path. Game over.\n";
+                break;
+            }
+
+            std::cout << "\n";
+        }
     }
 };
 
