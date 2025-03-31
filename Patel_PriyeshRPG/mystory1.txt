@@ -6,5 +6,6 @@
 6|Touching the relic floods you with energy... or something else.|8|4
 7|A stone altar offers a blessing for a price. Carve your name or walk past?|9|10
 8|A cursed specter lashes out from inside your mind.|-1|-1
-9|You carve your name. The runes burn into your soul. You feel power surge.|-1|-1
+9|You carve your name. The runes burn into your soul. You feel power surge.|11|-1
 10|You leave the altar untouched. A chill follows you as you climb.|-1|-1
+11|A door opens ahead, glowing faintly — you've reached the Tower's second floor.|-1|-1

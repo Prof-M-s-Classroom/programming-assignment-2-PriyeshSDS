@@ -58,12 +58,20 @@ public:
             Node<T>* currentNode = nodeMap[number];
 
             // Create or link right child
-            if (rightEventNumber != -1) {
-                if (nodeMap.find(rightEventNumber) == nodeMap.end()) {
-                    nodeMap[rightEventNumber] = new Node<T>(T());
-                }
-                currentNode->right = nodeMap[rightEventNumber];
-            }
+            if (leftEventNumber != -1) {
+    if (nodeMap.find(leftEventNumber) == nodeMap.end()) {
+        nodeMap[leftEventNumber] = new Node<T>(T());
+    }
+    currentNode->left = nodeMap[leftEventNumber];
+}
+
+if (rightEventNumber != -1) {
+    if (nodeMap.find(rightEventNumber) == nodeMap.end()) {
+        nodeMap[rightEventNumber] = new Node<T>(T());
+    }
+    currentNode->right = nodeMap[rightEventNumber];
+}
+
 
             // Set root from the first event processed
             if (!root) {
