@@ -12,7 +12,7 @@ template <typename T>
 class GameDecisionTree {
 private:
     Node<T>* root;
-    //For the tree
+    //For the tree, use the unorderd map library
     std::unordered_map<int, Node<T>*> nodeMap;
 
 public:
