@@ -54,23 +54,27 @@ public:
             } else {
                 nodeMap[number]->data = story;
             }
-
+			//set pointer of the current node to the node map at this event number
             Node<T>* currentNode = nodeMap[number];
 
-            // Create or link right child
+            // Create or link left and right child
+            //check if valid left child
             if (leftEventNumber != -1) {
-    if (nodeMap.find(leftEventNumber) == nodeMap.end()) {
-        nodeMap[leftEventNumber] = new Node<T>(T());
-    }
-    currentNode->left = nodeMap[leftEventNumber];
-}
+                //if node with the left event number doesnt already exist you have to create it
+    			if (nodeMap.find(leftEventNumber) == nodeMap.end()) {
+      	  		nodeMap[leftEventNumber] = new Node<T>(T());
+   				 }
+                                 //link the current nodes left to the where the left event number is in the node map
+    		currentNode->left = nodeMap[leftEventNumber];
+			}
 
-if (rightEventNumber != -1) {
-    if (nodeMap.find(rightEventNumber) == nodeMap.end()) {
-        nodeMap[rightEventNumber] = new Node<T>(T());
-    }
-    currentNode->right = nodeMap[rightEventNumber];
-}
+                        //same process as adding the left child
+			if (rightEventNumber != -1) {
+   			 if (nodeMap.find(rightEventNumber) == nodeMap.end()) {
+       			 nodeMap[rightEventNumber] = new Node<T>(T());
+  				  }
+   			 currentNode->right = nodeMap[rightEventNumber];
+				}
 
 
             // Set root from the first event processed
