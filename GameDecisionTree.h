@@ -12,6 +12,8 @@ template <typename T>
 class GameDecisionTree {
 private:
     Node<T>* root;
+    //For the tree
+    std::unordered_map<Node<T>*, Node<T>*> nodeMap;
 
 public:
     // TODO: Constructor
@@ -19,38 +21,58 @@ public:
 
     // TODO: Function to load story data from a text file and build the binary tree
     void loadStoryFromFile(const std::string& filename, char delimiter) {
-        string line;
-        //Load file
-        ifstream file("filename.txt");
-        //check if file was opened
+        //open file
+        std::ifstream file(filename);
+        //if file is not open print output failed to open file
         if (!file.is_open()) {
-            cout << "File could not be opened";
+            std::cerr << "Failed to open file: " << filename << std::endl;
             return;
         }
-        //Create temp vars for description, event #, left #, right #, go through each line
-        while (getline(file,line)) {
-            stringstream ss(line);
-            string part;
-            int values[4];
-            int i = 0;
+        //vairable for each line
+        std::string line;
+        //look while there are lines
+        while (std::getline(file, line)) {
+            //variable for string stream, variables for inputs
+            std::stringstream ss(line);
+            std::string eventStr, description, leftStr, rightStr;
 
-            //set values list to each value in the line
-            while (getline(ss, part, delimiter) && i < 4) {
-                values[i++] = stoi(part);
+            //Get current node and left and right node
+            int number = std::stoi(eventStr);
+            int leftEventNumber = std::stoi(leftStr);
+            int rightEventNumber = std::stoi(rightStr);
+
+            //create story variable with the inputs
+            T story(description,number ,leftEventNumber, rightEventNumber);
+
+            // Create node for this event if it doesn't exist
+            if (nodeMap.find(number) == nodeMap.end()) {
+                nodeMap[number] = new Node<T>(story);
+            } else {
+                nodeMap[number]->data = story;
             }
-            Story *tempStory = new Story(std::to_string(values[0]), values[1], values[2], values[3]);
-            Node<Story> *node = new Node<Story>(*tempStory);
 
-            Node
-            if (node->data.eventNumber < root->data.eventNumber) {
-                while (node->left != nullptr) {
+            Node<T>* currentNode = nodeMap[number];
 
+            // Create or link right child
+            if (rightEventNumber != -1) {
+                if (nodeMap.find(rightEventNumber) == nodeMap.end()) {
+                    nodeMap[rightEventNumber] = new Node<T>(T());
                 }
+                currentNode->right = nodeMap[rightEventNumber];
             }
+
+            // Set root from the first event processed
+            if (!root) {
+                root = currentNode;
+            }
+        }
+        //remeber to close file
+        file.close();
+
 
         }
 
-    }
+
 
     // TODO: Function to start the game and traverse the tree based on user input
     void playGame() {
