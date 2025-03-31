@@ -1,4 +1,4 @@
-#include "Story.h"
+#include "Patel_PriyeshRPG/Story.h"
 
 // TODO: Default constructor
 Story::Story() : description(""), eventNumber(0), leftEventNumber(-1), rightEventNumber(-1) {}

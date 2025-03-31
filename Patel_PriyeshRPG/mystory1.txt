@@ -1,0 +1,11 @@
+1|You stand before the Tower of Ash — its top lost in the clouds. A door creaks open.|2|3
+2|A goblin ambushes you in the crumbling entrance hall.|4|5
+3|You climb a shattered stairwell and find a glowing relic floating mid-air.|6|5
+4|You fight the goblin and win. Blood stains your blade.|7|-1
+5|You avoid confrontation but feel a dark presence watching.|7|-1
+6|Touching the relic floods you with energy... or something else.|8|4
+7|A stone altar offers a blessing for a price. Carve your name or walk past?|9|10
+8|A cursed specter lashes out from inside your mind.|-1|-1
+9|You carve your name. The runes burn into your soul. You feel power surge.|11|-1
+10|You leave the altar untouched. A chill follows you as you climb.|-1|-1
+11|A door opens ahead, glowing faintly — you've reached the Tower's second floor.|-1|-1
